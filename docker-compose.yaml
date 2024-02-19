@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  tfx:
+    image: tensorflow/tfx:1.12.0
+    build:
+      network: host
+    stdin_open: true
+    tty: true
+    container_name: tfx
+    command: ["pip", "install", "-r", "/tfx/src/requirements.txt"]
+    entrypoint: /run_jupyter.sh
+    volumes:
+      - './:/tfx/src'
+    ports:
+      - "8888:8888"
+      - "6006:6006"
